@@ -233,7 +233,7 @@ systemctl list-timers
 
 Liste des connexions réseau TCP et UDP :
 ```bash
-netstat -tuln
+netstat -ntlp
 ```
 
 Liste des processus en cours d'exécution :
