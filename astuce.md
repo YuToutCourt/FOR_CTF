@@ -100,6 +100,7 @@ Link Linpeas : https://github.com/carlospolop/PEASS-ng/releases/tag/20230529-e7d
 Nom d'hôte :
 ```bash
 hostname
+hostname -I
 ```
 
 Adresse IP actuelle :
