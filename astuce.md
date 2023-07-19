@@ -6,6 +6,8 @@ Sometimes we will get a shell but it won't be very convenient. There are some wa
 if you want a quick dirty little fix but not completely interactive this python command works well for python3
 ```bash
 python3 -c "import pty;pty.spawn('/bin/bash')"
+Ctrl+Z
+stty raw -echo; fg
 ```
 
 ## With socat
