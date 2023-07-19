@@ -260,7 +260,7 @@ ls -la /etc/init.d/
 
 Version de Sudo :
 ```bash
-sudo -V
+sudo -v
 ```
 
 Version de MYSQL :
