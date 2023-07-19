@@ -285,7 +285,7 @@ apachectl -M
 
 Vérification des fichiers htpasswd :
 ```bash
-find / -name ".htpasswd" -print
+find / -name ".htpasswd" -print 2>/dev/null
 ```
 
 Affichage des répertoires www :
