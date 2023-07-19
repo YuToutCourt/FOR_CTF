@@ -95,6 +95,296 @@ Link Linpeas : https://github.com/carlospolop/PEASS-ng/releases/tag/20230529-e7d
 `find / -writable ! -user whoami -type f ! -path "/proc/*" ! -path "/sys/*" -exec ls -al {} \; 2>/dev/null`
 
 
+# System Information
+
+Nom d'hôte :
+```bash
+hostname
+```
+
+Adresse IP actuelle :
+```bash
+ip addr show
+```
+Détails de la route par défaut :
+
+```bash
+ip route
+```
+
+Informations sur les serveurs DNS :
+```bash
+cat /etc/resolv.conf
+```
+
+# Informations sur les utilisateurs :
+
+Détails de l'utilisateur actuel :
+```bash
+id
+```
+
+Derniers utilisateurs connectés :
+```bash
+last
+```
+
+Utilisateurs connectés actuellement :
+```bash
+who
+```
+Liste de tous les utilisateurs avec informations uid/gid :
+```bash
+cat /etc/passwd
+```
+
+Liste des comptes root :
+```bash
+grep 'root' /etc/passwd
+```
+
+Politiques de mot de passe et méthode de stockage des mots de passe :
+```bash
+cat /etc/login.defs
+cat /etc/shadow
+```
+
+Vérification de la valeur umask :
+```bash
+umask
+```
+
+Vérification de l'emplacement de stockage des hachages de mot de passe (devrait être /etc/shadow) :
+```bash
+grep -E ':[^\!*]' /etc/passwd
+```
+
+Extraction des détails complets pour les uid 'par défaut' tels que 0, 1000, 1001, etc. :
+```bash
+getent passwd 0
+getent passwd 1000
+getent passwd 1001
+# Ajouter d'autres uid au besoin.
+```
+
+Tentative de lecture de fichiers restreints (par exemple, /etc/shadow) :
+```bash
+cat /etc/shadow
+```
+
+Liste des fichiers d'historique des utilisateurs actuels :
+```bash
+ls -la ~/.bash_history
+ls -la ~/.nano_history
+ls -la ~/.mysql_history
+# Ajouter d'autres fichiers d'historique au besoin.
+```
+
+Vérification des utilisateurs ayant récemment utilisé sudo :
+```bash
+grep -E 'sudo:.*(command)' /var/log/auth.log
+```
+
+Vérification de l'accès à /etc/sudoers :
+```bash
+sudo -l
+```
+
+Vérification si l'utilisateur actuel a un accès Sudo sans mot de passe :
+```bash
+sudo -n -l
+```
+
+# Informations environnementales :
+
+Affichage de la variable $PATH :
+```bash
+echo $PATH
+```
+
+Affichage des informations d'environnement :
+```bash
+env
+```
+
+Tâches et emplois :
+
+Liste de toutes les tâches cron :
+```bash
+crontab -l
+```
+Localisation de toutes les tâches cron accessibles en écriture par tous :
+```bash
+ls -la /etc/cron*
+```
+
+Localisation des tâches cron appartenant à d'autres utilisateurs du système :
+```bash
+find /etc/cron* -user !root
+```
+
+Liste des timers systemd actifs et inactifs :
+```bash
+systemctl list-timers
+```
+
+# Services et connexions réseau :
+
+Liste des connexions réseau TCP et UDP :
+```bash
+netstat -tuln
+```
+
+Liste des processus en cours d'exécution :
+```bash
+ps aux
+```
+
+Recherche et liste des binaires de processus et des permissions associées :
+```bash
+ps -ef | awk '{print $8}' | xargs -l readlink -f
+```
+Affichage du contenu d'inetd.conf/xined.conf et des permissions du fichier binaire associé :
+```bash
+cat /etc/inetd.conf
+cat /etc/xinetd.conf
+```
+
+
+Liste des permissions binaires init.d :
+```bash
+ls -la /etc/init.d/
+```
+
+# Informations sur les versions :
+
+Version de Sudo :
+```bash
+sudo -V
+```
+
+Version de MYSQL :
+```bash
+mysql --version
+```
+
+Version de Postgres :
+```bash
+postgres --version
+```
+
+Version d'Apache :
+```bash
+apache2 -v
+```
+
+Vérification de la configuration utilisateur d'Apache et des modules activés :
+```bash
+apachectl -M
+```
+
+Vérification des fichiers htpasswd :
+```bash
+find / -name ".htpasswd" -print
+```
+
+Affichage des répertoires www :
+```bash
+ls -la /var/www/
+```
+
+
+# Identifiants par défaut/faibles :
+
+Vérification des comptes Postgres par défaut/faibles :
+```bash
+psql -U postgres -l
+```
+
+Vérification des comptes MYSQL par défaut/faibles :
+```bash
+mysql -u root -e "SELECT User, Host FROM mysql.user;"
+```
+
+# Recherches :
+
+Localisation de tous les fichiers SUID/GUID :
+```bash
+find / -type f -perm /4000 -o -perm /2000
+```
+
+Localisation de tous les fichiers SUID/GUID accessibles en écriture par tous :
+```bash
+find / -type f -perm /6000 -o -perm /2000
+```
+
+Localisation de tous les fichiers SUID/GUID appartenant à root :
+```bash
+find / -type f -user root -perm /4000 -o -perm /2000
+```
+
+Localisation des fichiers SUID/GUID "intéressants" (par exemple, nmap, vim, etc.) :
+```bash
+find / -type f -perm /4000 -o -perm /2000 -exec ls -l {} \;
+```
+
+Localisation des fichiers avec des capacités POSIX :
+```bash
+getcap -r / 2>/dev/null
+```
+
+Liste de tous les fichiers accessibles en écriture par tous les utilisateurs :
+```bash
+find / -type f -perm /o+w
+```
+
+Recherche et affichage du contenu des fichiers *.plan accessibles :
+```bash
+find / -name "*.plan" -print -exec cat {} \;
+```
+
+Recherche et affichage du contenu des fichiers *.rhosts accessibles :
+```bash
+find / -name "*.rhosts" -print -exec cat {} \;
+```
+
+Affichage des détails du serveur NFS :
+```bash
+showmount -e
+```
+
+Localisation des fichiers *.conf et *.log contenant un mot-clé spécifié au moment de l'exécution du script :
+```bash
+grep -rnw /etc -e "mot-clé"
+```
+
+Liste de tous les fichiers *.conf dans /etc :
+```bash
+find /etc -name "*.conf" -type f
+```
+
+Localisation des fichiers de courrier :
+```bash
+find /var/mail/ -type f
+```
+
+# Tests spécifiques à la plateforme/logiciel :
+
+Vérification pour savoir si nous sommes dans un conteneur Docker :
+```bash
+cat /proc/1/cgroup | grep -i docker
+```
+
+Vérification de l'installation de Docker :
+```bash
+docker --version
+```
+
+Vérification pour savoir si nous sommes dans un conteneur LXC :
+```bash
+cat /proc/1/environ | grep -q lxc
+```
+
 ```py
 import subprocess
 subprocess.call("/bin/sh")
