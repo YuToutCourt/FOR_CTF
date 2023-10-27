@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Ghostly Templates</title>
+    <title>Lecture de fichier</title>
 </head>
-
-<script>
-var xhr = new XMLHttpRequest();
-var url = "../../flag.txt";
-
-xhr.open("GET", url, true);
-
-xhr.onreadystatechange = function () {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    var contenuFichier = xhr.responseText;
-    document.getElementById("contenuFichier").innerHTML = contenuFichier;
-  }
-};
-
-xhr.send();
-</script>
-
-<body class="bg-dark text-light">
-    <div id="contenuFichier"></div>
-
+<body>
+    <h1>Contenu du fichier :</h1>
+    <pre id="fileContent"></pre>
 </body>
-
 </html>
+$(document).ready(function() {
+    $.ajax({
+        url: '/readfile', // L'URL à laquelle le serveur lit le fichier
+        type: 'GET',
+        dataType: 'text',
+        success: function(data) {
+            $('#fileContent').text(data);
+        },
+        error: function() {
+            $('#fileContent').text('Erreur lors de la lecture du fichier.');
+        }
+    });
+});
+<script>
+func readFileHandler(w http.ResponseWriter, r *http.Request) {
+    filePath := "../../flag.txt" // Spécifiez le chemin vers le fichier que vous voulez lire.
+
+    fileContent, err := readFileContents(filePath)
+    if err != nil {
+        http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+        return
+    }
+
+    w.Header().Set("Content-Type", "text/plain")
+    w.Write([]byte(fileContent))
+}
+</script>
