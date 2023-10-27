@@ -36,24 +36,14 @@
                 <h1>Available template data</h1>
                 <hr>
                 <ul>
-                    <li>ClientIP {{.ClientUA}}</li>
-                    <li>ClientUA</li>
-                    <li>ClientIpInfo.IpVersion</li>
-                    <li>ClientIpInfo.IpAddress</li>
-                    <li>ClientIpInfo.Latitude</li>
-                    <li>ClientIpInfo.Longitude</li>
-                    <li>ClientIpInfo.CountryName</li>
-                    <li>ClientIpInfo.CountryCode</li>
-                    <li>ClientIpInfo.TimeZone</li>
-                    <li>ClientIpInfo.ZipCode</li>
-                    <li>ClientIpInfo.CityName</li>
-                    <li>ClientIpInfo.RegionName</li>
-                    <li>ClientIpInfo.Continent</li>
-                    <li>ClientIpInfo.ContinentCode</li>
-                    <li>ServerInfo.Hostname</li>
-                    <li>ServerInfo.OS</li>
-                    <li>ServerInfo.KernelVersion</li>
-                    <li>ServerInfo.Memory</li>
+                    <p>Adresse IP du client : {{.ClientIP}}</p>
+                    <p>User-Agent du client : {{.ClientUA}}</p>
+                    <p>Hostname du serveur : {{.ServerInfo.Hostname}}</p>
+                    <p>Système d'exploitation du serveur : {{.ServerInfo.OS}}</p>
+                    <p>Version du noyau du serveur : {{.ServerInfo.KernelVersion}}</p>
+                    <p>Mémoire du serveur : {{.ServerInfo.Memory}}</p>
+                    <p>Pays du client : {{.ClientIpInfo.Country}}</p>
+                    <p>Code de pays du client : {{.ClientIpInfo.CountryCode}}</p>
                 </ul>
                 <h3>Enter the link to your template!</h3>
                 <hr>
