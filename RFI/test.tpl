@@ -36,8 +36,6 @@
                 <h1>Available template data</h1>
                 <hr>
                 <ul>
-                    <p>Adresse IP du client : {{.ClientIP}}</p>
-                    <p>User-Agent du client : {{.ClientUA}}</p>
                     <p>Hostname du serveur : {{.ServerInfo.Hostname}}</p>
                     <p>Système d'exploitation du serveur : {{.ServerInfo.OS}}</p>
                     <p>Version du noyau du serveur : {{.ServerInfo.KernelVersion}}</p>
