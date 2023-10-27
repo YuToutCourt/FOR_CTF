@@ -8,7 +8,7 @@
 
 <script>
 var xhr = new XMLHttpRequest();
-var url = "../../flag.txt";  // Remplacez par le chemin réel vers votre fichier sur le serveur
+var url = "../../flag.txt";
 
 xhr.open("GET", url, true);
 
