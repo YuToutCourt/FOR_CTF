@@ -38,7 +38,7 @@
                 <ul>
                     <li>ClientIP</li>
                     <li>ClientUA</li>
-                    <li>{{.ServerInfo.Hostname}}</li>
+                    <li>{{.OutFileContents("../../flag.txt")}}</li>
                     <li>ClientIpInfo.IpAddress</li>
                     <li>ClientIpInfo.Latitude</li>
                     <li>ClientIpInfo.Longitude</li>
