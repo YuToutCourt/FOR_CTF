@@ -1,59 +1,71 @@
-package main
-
-import (
-    "fmt"
-    "net/http"
-)
-
-func main() {
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        if r.URL.Path == "/" {
-            html := `
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Lecture de fichier</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="lean">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/logo.png" type="image/png">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>Ghostly Templates</title>
 </head>
-<body>
-    <h1>Contenu du fichier :</h1>
-    <pre id="fileContent"></pre>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: '/readfile',
-                type: 'GET',
-                dataType: 'text',
-                success: function(data) {
-                    $('#fileContent').text(data);
-                },
-                error: function() {
-                    $('#fileContent').text('Erreur lors de la lecture du fichier.');
-                }
-            });
-        });
-    </script>
+
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/static/logo.png" alt="Bootstrap">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <h1>Ghostly Templates!</h1>
+                <hr>
+                <p>Unleash your inner ghoul with words and eerie artistry</p>
+                <p>You conjure the incantations, we supply the spectral data!</p>
+            </div>
+        </div>
+        <div class="row mt-2 mb-5">
+            <div class="col">
+                <h1>Available template data</h1>
+                <hr>
+                <ul>
+                    <li>ClientIP</li>
+                    <li>ClientUA</li>
+                    <li>{{.ServerInfo.Hostname}}</li>
+                    <li>ClientIpInfo.IpAddress</li>
+                    <li>ClientIpInfo.Latitude</li>
+                    <li>ClientIpInfo.Longitude</li>
+                    <li>ClientIpInfo.CountryName</li>
+                    <li>ClientIpInfo.CountryCode</li>
+                    <li>ClientIpInfo.TimeZone</li>
+                    <li>ClientIpInfo.ZipCode</li>
+                    <li>ClientIpInfo.CityName</li>
+                    <li>ClientIpInfo.RegionName</li>
+                    <li>ClientIpInfo.Continent</li>
+                    <li>ClientIpInfo.ContinentCode</li>
+                    <li>ServerInfo.Hostname</li>
+                    <li>ServerInfo.OS</li>
+                    <li>ServerInfo.KernelVersion</li>
+                    <li>ServerInfo.Memory</li>
+                </ul>
+                <h3>Enter the link to your template!</h3>
+                <hr>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="templateLink">
+                    <button class="btn btn-primary" id="templateButton">Render now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/script.js"></script>
 </body>
+
 </html>
-`
-            w.Header().Set("Content-Type", "text/html")
-            w.Write([]byte(html))
-        }
-    })
-
-    http.HandleFunc("/readfile", func(w http.ResponseWriter, r *http.Request) {
-        filePath := "chemin/vers/votre/fichier.txt" // Spécifiez le chemin vers le fichier que vous voulez lire
-
-        fileContent, err := readFileContents(filePath)
-        if err != nil {
-            http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-            return
-        }
-
-        w.Header().Set("Content-Type", "text/plain")
-        w.Write([]byte(fileContent))
-    })
-
-    fmt.Println("Serveur démarré à :1337")
-    http.ListenAndServe(":1337", nil)
-}
