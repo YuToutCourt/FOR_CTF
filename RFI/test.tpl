@@ -36,7 +36,7 @@
                 <h1>Available template data</h1>
                 <hr>
                 <ul>
-                    <li>ClientIP {{.reqData.ClientIP}}</li>
+                    <li>ClientIP {{.ClientIP}}</li>
                     <li>ClientUA</li>
                     <li>ClientIpInfo.IpVersion</li>
                     <li>ClientIpInfo.IpAddress</li>
