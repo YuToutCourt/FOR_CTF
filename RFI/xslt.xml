@@ -13,7 +13,7 @@
     <generator>Exemple RSS Generator</generator>
     
     <item>
-      <title>Premier Article</title>
+      <title>&xxe;</title>
       <link>https://www.example.com/premier-article</link>
       <description>Ceci est le premier article de notre flux RSS.</description>
       <author>contact@example.com (Nom de l'Auteur)</author>
