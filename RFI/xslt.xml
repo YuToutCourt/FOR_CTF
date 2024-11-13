@@ -1,7 +1,31 @@
-<code>
-  <message>
-    <warning>
-      Hello World
-    </warning>
-  </message>
-</code>
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Exemple de Flux RSS</title>
+    <link>https://www.example.com</link>
+    <description>Ceci est un exemple de flux RSS valide</description>
+    <language>fr</language>
+    <pubDate>Mon, 13 Nov 2023 10:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 13 Nov 2023 10:00:00 GMT</lastBuildDate>
+    <generator>Exemple RSS Generator</generator>
+    
+    <item>
+      <title>Premier Article</title>
+      <link>https://www.example.com/premier-article</link>
+      <description>Ceci est le premier article de notre flux RSS.</description>
+      <author>contact@example.com (Nom de l'Auteur)</author>
+      <pubDate>Mon, 13 Nov 2023 10:30:00 GMT</pubDate>
+      <guid>https://www.example.com/premier-article</guid>
+    </item>
+
+    <item>
+      <title>Deuxième Article</title>
+      <link>https://www.example.com/deuxieme-article</link>
+      <description>Ceci est le deuxième article de notre flux RSS.</description>
+      <author>contact@example.com (Nom de l'Auteur)</author>
+      <pubDate>Tue, 14 Nov 2023 11:00:00 GMT</pubDate>
+      <guid>https://www.example.com/deuxieme-article</guid>
+    </item>
+
+  </channel>
+</rss>
