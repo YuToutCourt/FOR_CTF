@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE body [
-    <!ENTITY warning "Avertissement&nbsp;: Quelque chose ne fonctionne pas correctement…
-                      Veuillez rafraîchir et réessayer.">
-]>
-<body>
-  <message> &warning; </message>
-</body>
+<code>
+  <message>
+    <warning>
+      Hello World
+    </warning>
+  </message>
+</code>
